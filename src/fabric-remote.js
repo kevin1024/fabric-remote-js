@@ -5,8 +5,8 @@
     this.port = port; 
     this.password = password; 
   };
-  FabricRemote.foo = function() {
-    console.log('foo');
+  FabricRemote.prototype.listTasks = function() {
+    return ['a','b','c'];
   };
   this.FabricRemote = FabricRemote;
 }.call(this));
