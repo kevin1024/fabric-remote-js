@@ -14,7 +14,7 @@ bower install fabric-remote-js
 Fabric Remote Js provides the `FabricRemote` object.  This needs to be configured to point to the correct Fabric Remote server, and given the authorization credentials:
 
 ```javascript
-var fr = new FabricRemote("localhost", 1234, "opensesame");
+var fr = new FabricRemote("http://localhost", 1234, "opensesame");
 ```
 
 Now you can get a list of available commands:

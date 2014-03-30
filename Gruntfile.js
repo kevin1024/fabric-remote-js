@@ -17,7 +17,11 @@ module.exports = function(grunt) {
       options: {
         specs: 'spec/*Spec.js',
         helpers: 'spec/*Helper.js',
-        vendor: 'vendor/*.js'
+        version: '2.0.0',
+        vendor: [
+	  'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
+	  'vendor/*.js'
+	]
       }
     },
     jshint: {
