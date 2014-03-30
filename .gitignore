@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
 .tmp
+*.swp
 dist/
 .coverage_data/
 .coverage_debug/

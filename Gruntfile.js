@@ -19,15 +19,17 @@ module.exports = function(grunt) {
         helpers: 'spec/*Helper.js',
         vendor: 'vendor/*.js'
       }
+    },
+    jshint: {
+      all: 'src/*.js',
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['jshint','jasmine','uglify']);
 
 };
