@@ -10,6 +10,9 @@ module.exports = function(grunt) {
         dest: 'build/<%= pkg.name %>.min.js'
       }
     },
+    jasmine_node: {
+      all: ['spec/']
+    },
     jasmine: {
       src: 'build/module.js',
       options: {
@@ -38,9 +41,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 
   // Default task(s).
   grunt.registerTask('test:browser', ['jshint','browserify','jasmine']);
-  grunt.registerTask('test:node', ['jshint','jasmine-node']);
+  grunt.registerTask('test:node', ['jshint','jasmine_node']);
 
 };
