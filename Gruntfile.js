@@ -19,19 +19,27 @@ module.exports = function(grunt) {
         helpers: 'spec/*Helper.js',
         version: '2.0.0',
         vendor: [
-	  'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js',
-	  'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
+	'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js',
+	'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
 	]
       }
     },
     jshint: {
-      all: 'src/*.js',
+      all: 'src/*.js'
+    },
+    browserify: {
+      dist: {
+        files: {
+          'build/module.js': ['src/**/*.js'],
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint','jasmine','uglify']);
