@@ -10,20 +10,32 @@ var FabricRemote = function(host, port, password) {
 };
 
 FabricRemote.prototype.request = function(method, path) {
-  var buffer = '';
   var deferred = q.defer();
-  var url = this.host + ':' + this.port + path;
-  var res = http.request({
-    path: url,
+
+  var buffer = "";
+
+  var options = {
+    hostname: this.host,
+    port: this.port,
+    path: path,
     method: method,
+  };
+
+  var req = http.request(options, function(res) {
+    res.on('data', function (chunk) {
+      buffer += chunk;
+    });
+    res.on('end', function (chunk) {
+      deferred.resolve(buffer);
+    });
   });
-  res.on('data', function(data) {
-    buffer += data;
+
+  req.on('error', function(e) {
+    deferred.reject(e);
   });
-  res.on('end', function() {
-    deferred.resolve(buffer);
-  });
-  return deferred;
+
+  req.end();
+  return deferred.promise;
 };
 
 FabricRemote.prototype.listTasks = function() {

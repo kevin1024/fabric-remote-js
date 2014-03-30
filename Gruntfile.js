@@ -13,11 +13,17 @@ module.exports = function(grunt) {
     jasmine_node: {
       all: ['spec/']
     },
+    connect: {
+      test: {
+        port: 8000,
+      }
+    },
     jasmine: {
       src: 'build/module.js',
       options: {
         specs: 'build/spec.js',
-        version: '1.3.1'
+        version: '1.3.1',
+        host : 'http://127.0.0.1:8000/'
       }
     },
     jshint: {
@@ -38,9 +44,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
-  grunt.registerTask('test:browser', ['jshint','browserify','jasmine']);
+  grunt.registerTask('test:browser', ['jshint','browserify','connect','jasmine']);
   grunt.registerTask('test:node', ['jshint','jasmine_node']);
 
 };
