@@ -17,11 +17,7 @@ module.exports = function(grunt) {
       src: 'build/module.js',
       options: {
         specs: 'build/spec.js',
-        version: '2.0.0',
-        vendor: [
-          'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js',
-          'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
-        ]
+        version: '1.3.1'
       }
     },
     jshint: {
