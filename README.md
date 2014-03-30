@@ -55,4 +55,4 @@ fr.call([
 ])
 ```
 
-Both of these return a promise (using the Q library).  You can also get progress notifications (streaming output of the command).  See the [Q docs](https://github.com/kriskowal/q#progress-notification) for more.
+Both of these return a jquery promise.

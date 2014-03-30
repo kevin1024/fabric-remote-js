@@ -9,7 +9,8 @@
     var url = this.host + ':' + this.port + path;
     return $.ajax({
       url: url,
-      method: method
+      method: method,
+      dataType: 'json'
     });
   };
   FabricRemote.prototype.listTasks = function() {
