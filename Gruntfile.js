@@ -1,6 +1,4 @@
 module.exports = function(grunt) {
-
-  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
@@ -13,15 +11,14 @@ module.exports = function(grunt) {
       }
     },
     jasmine: {
-      src: 'src/**/*.js',
+      src: 'build/module.js',
       options: {
-        specs: 'spec/*Spec.js',
-        helpers: 'spec/*Helper.js',
+        specs: 'build/spec.js',
         version: '2.0.0',
         vendor: [
-	'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js',
-	'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
-	]
+          'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js',
+          'https://raw.githubusercontent.com/pivotal/jasmine-ajax/master/lib/mock-ajax.js',
+        ]
       }
     },
     jshint: {
@@ -31,6 +28,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'build/module.js': ['src/**/*.js'],
+          'build/spec.js': ['spec/**/*.js']
         }
       }
     }
@@ -42,6 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint','jasmine','uglify']);
+  grunt.registerTask('test:browser', ['jshint','browserify','jasmine']);
+  grunt.registerTask('test:node', ['jshint','jasmine-node']);
 
 };
