@@ -12,21 +12,25 @@ var FabricRemote = function(host, port, password) {
 FabricRemote.prototype.request = function(method, path) {
   var deferred = q.defer();
 
-  var buffer = "";
 
   var options = {
     hostname: this.host,
     port: this.port,
     path: path,
     method: method,
+    headers: {
+      'Authorization': 'Basic ' + new Buffer('admin:' + this.password).toString('base64')
+    }     
   };
 
   var req = http.request(options, function(res) {
+    var buffer = "";
     res.on('data', function (chunk) {
+      console.log('CHUNK');
       buffer += chunk;
     });
     res.on('end', function (chunk) {
-      deferred.resolve(buffer);
+      deferred.resolve(JSON.parse(buffer));
     });
   });
 

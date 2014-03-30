@@ -12,7 +12,11 @@ describe("FabricRemote", function() {
     fr.listTasks().then(function(data) {
       output = data;
     });
-    waits(500);
-    expect(output).toEqual('2,3,4,');
+    waitsFor(function() {
+      return output;
+    }, "the http call has been made", 1000);
+    runs(function() {
+      expect(output).toEqual({ host_type : { name : 'host_type', description : null }, check_foo : { name : 'check_foo', description : null } });
+    });
   });
 });
