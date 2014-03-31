@@ -9,7 +9,7 @@ var FabricRemote = function(host, port, password) {
   this.password = password; 
 };
 
-FabricRemote.prototype.request = function(method, path) {
+FabricRemote.prototype.request = function(method, path, data) {
   var deferred = q.defer();
 
 
@@ -27,7 +27,6 @@ FabricRemote.prototype.request = function(method, path) {
   var req = http.request(options, function(res) {
     var buffer = "";
     res.on('data', function (chunk) {
-      console.log('CHUNK');
       buffer += chunk;
     });
     res.on('end', function (chunk) {
@@ -38,13 +37,21 @@ FabricRemote.prototype.request = function(method, path) {
   req.on('error', function(e) {
     deferred.reject(e);
   });
-
+  console.log(data);
+  if (data) {
+    req.write(data);
+  }
   req.end();
   return deferred.promise;
 };
 
 FabricRemote.prototype.listTasks = function() {
   return this.request('GET', '/tasks');
+};
+
+FabricRemote.prototype.execute = function(execution) {
+  var that = this;
+  return this.request('POST', '/executions', JSON.stringify(execution));
 };
 
 module.exports = FabricRemote;

@@ -17,10 +17,10 @@ Fabric Remote Js provides the `FabricRemote` object.  This needs to be configure
 var fr = new FabricRemote("http://localhost", 1234, "opensesame");
 ```
 
-Now you can get a list of available commands:
+Now you can get a list of available tasks:
 
 ```javascript
-fr.list_commands();
+fr.listTasks();
 ```
 
 This returns a javascript object like this:
@@ -38,19 +38,10 @@ This returns a javascript object like this:
 }
 ```
 
-You can also call commands like this:
+Here is how you execute tasks.  This allows you to pass args and kwargs, and you can also pass a list of tasks.
 
 ```javascript
-fr.host_type()
-  .then(return_value) {
-    console.log(return_value);
-}
-```
-
-There is a longer syntax for calling commands.  This allows you to pass args and kwargs, and you can also pass a list of tasks.
-
-```javascript
-fr.call([
+fr.execute([
   {task: "host_type", args: ["foo", "bar"], kwargs: {"arg1":"val1"}}
 ])
 ```
