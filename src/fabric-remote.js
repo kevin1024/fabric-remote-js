@@ -17,6 +17,7 @@ FabricRemote.prototype.request = function(method, path) {
     hostname: this.host,
     port: this.port,
     path: path,
+    agent: false,
     method: method,
     headers: {
       'Authorization': 'Basic ' + new Buffer('admin:' + this.password).toString('base64')
