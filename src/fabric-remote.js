@@ -54,8 +54,18 @@ FabricRemote.prototype.listTasks = function() {
 };
 
 FabricRemote.prototype.execute = function(execution) {
+  var deferred = q.defer();
   var that = this;
-  return this.request('POST', '/executions', JSON.stringify(execution));
+  console.log('posting');
+  this.request('POST', '/executions', JSON.stringify(execution))
+  .then(function(data) {
+    console.log('got execution response', data);
+    that.request('GET', data.results)
+    .then(function(data) {
+      deferred.resolve(data);
+    });
+  });
+  return deferred.promise;
 };
 
 module.exports = FabricRemote;

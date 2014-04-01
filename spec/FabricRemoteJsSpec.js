@@ -31,7 +31,7 @@ describe("FabricRemote", function() {
       return output;
     }, "the task to be executed", 1000);
     runs(function() {
-      expect(output).toEqual({});
+      expect(output).toEqual({"host_type": "shit worked"});
     });
   });
 
