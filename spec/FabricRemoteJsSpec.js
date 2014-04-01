@@ -29,9 +29,9 @@ describe("FabricRemote", function() {
     });
     waitsFor(function() {
       return output;
-    }, "the task to be executed", 1000);
+    }, "the task to be executed", 100000);
     runs(function() {
-      expect(output).toEqual({"host_type": "shit worked"});
+      expect(output['results'][0][1]).toEqual({"98.129.6.188":"shit worked"});
     });
   });
 

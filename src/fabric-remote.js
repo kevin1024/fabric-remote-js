@@ -2,6 +2,7 @@
 'use strict';
 var http = require('http');
 var q = require('q');
+var retry = require('retry');
 
 var FabricRemote = function(host, port, password) {
   this.host = host; 
@@ -53,17 +54,36 @@ FabricRemote.prototype.listTasks = function() {
   return this.request('GET', '/tasks');
 };
 
-FabricRemote.prototype.execute = function(execution) {
+FabricRemote.prototype.pollResults = function(resultsUrl) {
   var deferred = q.defer();
+  var operation = retry.operation({
+    retries: 10,
+    factor: 2,
+    minTimeout: 0.5 * 1000,
+    maxTimeout: 60 * 1000,
+    randomize: true,
+  });
   var that = this;
-  console.log('posting');
+  operation.attempt(function(currentAttempt) {
+    that.request('GET', resultsUrl)
+    .then(function(data) {
+      if (!data.finished) {
+        operation.retry(true);
+      }
+      else {
+        deferred.resolve(data);
+      }
+    });
+  });
+  return deferred.promise;
+};
+
+FabricRemote.prototype.execute = function(execution) {
+  var that = this;
+  var deferred = q.defer();
   this.request('POST', '/executions', JSON.stringify(execution))
   .then(function(data) {
-    console.log('got execution response', data);
-    that.request('GET', data.results)
-    .then(function(data) {
-      deferred.resolve(data);
-    });
+    deferred.resolve(that.pollResults(data.results));
   });
   return deferred.promise;
 };
