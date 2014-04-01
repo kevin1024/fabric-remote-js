@@ -35,4 +35,22 @@ describe("FabricRemote", function() {
     });
   });
 
+  it("can report progress", function() {
+    var results;
+    var output = '';
+    var executions = [{"task":"host_type"}];
+    fr.execute(executions).progress(function(data) {
+      output += data;
+    })
+    .then(function(data) {
+      results = data;
+    });
+    waitsFor(function() {
+      return results;
+    }, "the task to be executed", 100000);
+    runs(function() {
+      expect(output.length).toBeGreaterThan(100);
+    });
+  });
+
 });

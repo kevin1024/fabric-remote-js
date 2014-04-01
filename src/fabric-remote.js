@@ -54,13 +54,33 @@ FabricRemote.prototype.listTasks = function() {
   return this.request('GET', '/tasks');
 };
 
-FabricRemote.prototype.pollResults = function(resultsUrl) {
-  var deferred = q.defer();
+FabricRemote.prototype.streamOutput = function(deferred, outputUrl) {
+  var buffer = "";
+  var options = {
+    hostname: this.host,
+    port: this.port,
+    path: outputUrl,
+    agent: false,
+    method: 'GET',
+    headers: {
+      'Authorization': 'Basic ' + new Buffer('admin:' + this.password).toString('base64'),
+      'Host': this.host
+    }
+  };
+  var req = http.request(options, function(res) {
+    res.on('data', function (chunk) {
+      deferred.notify(chunk.toString('utf-8'));
+    });
+  });
+  req.end();
+};
+
+FabricRemote.prototype.pollResults = function(deferred, resultsUrl) {
   var operation = retry.operation({
-    retries: 10,
+    retries: 20,
     factor: 2,
     minTimeout: 0.5 * 1000,
-    maxTimeout: 60 * 1000,
+    maxTimeout: 30 * 1000,
     randomize: true,
   });
   var that = this;
@@ -83,7 +103,8 @@ FabricRemote.prototype.execute = function(execution) {
   var deferred = q.defer();
   this.request('POST', '/executions', JSON.stringify(execution))
   .then(function(data) {
-    deferred.resolve(that.pollResults(data.results));
+    that.pollResults(deferred, data.results);
+    that.streamOutput(deferred, data.output);
   });
   return deferred.promise;
 };
