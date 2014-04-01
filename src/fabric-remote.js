@@ -11,8 +11,6 @@ var FabricRemote = function(host, port, password) {
 
 FabricRemote.prototype.request = function(method, path, data) {
   var deferred = q.defer();
-
-
   var options = {
     hostname: this.host,
     port: this.port,
@@ -20,16 +18,22 @@ FabricRemote.prototype.request = function(method, path, data) {
     agent: false,
     method: method,
     headers: {
-      'Authorization': 'Basic ' + new Buffer('admin:' + this.password).toString('base64')
-    }     
+      'Authorization': 'Basic ' + new Buffer('admin:' + this.password).toString('base64'),
+      'Content-Type': 'application/json',
+      'Host': this.host
+    }
   };
+
+  if (data) {
+    options.headers['Content-Length'] = data.length;
+  }
 
   var req = http.request(options, function(res) {
     var buffer = "";
     res.on('data', function (chunk) {
       buffer += chunk;
     });
-    res.on('end', function (chunk) {
+    res.on('end', function () {
       deferred.resolve(JSON.parse(buffer));
     });
   });
@@ -37,7 +41,7 @@ FabricRemote.prototype.request = function(method, path, data) {
   req.on('error', function(e) {
     deferred.reject(e);
   });
-  console.log(data);
+
   if (data) {
     req.write(data);
   }
