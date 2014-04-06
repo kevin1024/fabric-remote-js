@@ -35,6 +35,12 @@ module.exports = function(grunt) {
           'build/module.js': ['src/**/*.js'],
           'build/spec.js': ['spec/**/*.js']
         }
+      },
+      options: {
+        bundleOptions: {
+          standalone: "FabricRemote",
+          debug: true
+        }
       }
     }
   });
