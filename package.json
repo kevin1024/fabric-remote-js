@@ -1,5 +1,5 @@
 {
-  "name": "fabric-remote-client",
+  "name": "fabric-remote",
   "version": "0.0.1",
   "author": "Kevin McCarthy <me@kevinmccarthy.org>",
   "devDependencies": {
