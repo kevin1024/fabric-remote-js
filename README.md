@@ -1,4 +1,4 @@
-# Fabric Remote JS
+# Fabric Remote JS Client
 
 This is a javascript interface to Fabric Remote.  It allows you to remotely call
 Fabric commands over the HTTP REST API provided by Fabric Remote.  It works both
@@ -12,12 +12,12 @@ It's a project I'm working on that I haven't open sourced yet.  But this is the 
 
 For the browser:
 ```
-bower install fabric-remote-js
+bower install fabric-remote
 ```
 
 For node:
 ```
-npm install fabric-remote-js
+npm install fabric-remote
 ```
 
 
