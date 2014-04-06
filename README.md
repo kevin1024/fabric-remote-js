@@ -1,7 +1,8 @@
 # Fabric Remote JS
 
 This is a javascript interface to Fabric Remote.  It allows you to remotely call
-Fabric commands over the HTTP REST API provided by Fabric Remote.
+Fabric commands over the HTTP REST API provided by Fabric Remote.  It works both
+as a node module (server-site) and in the browser, thanks to browserify.
 
 # What is Fabric Remote?
 
@@ -9,9 +10,16 @@ It's a project I'm working on that I haven't open sourced yet.  But this is the 
 
 # Installation
 
+For the browser:
 ```
 bower install fabric-remote-js
 ```
+
+For node:
+```
+npm install fabric-remote-js
+```
+
 
 # Usage
 
@@ -27,7 +35,7 @@ Now you can get a list of available tasks:
 fr.listTasks();
 ```
 
-This returns a javascript object like this:
+This returns a promise that will return a result like this:
 
 ```javascript
 {
@@ -50,8 +58,10 @@ fr.execute([
 ])
 ```
 
-Both of these return a q.js promise
-
 # Promise interface
 
 You can call .progress() on the promise to get regular updates of the streaming output of the task execution.  .success() will get called with the output of your execution.
+
+# TODO
+
+Error handling sucks.
