@@ -1,7 +1,8 @@
 {
   "name": "fabric-remote",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Kevin McCarthy <me@kevinmccarthy.org>",
+  "main": "src/fabric-remote.js",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.9.2",
