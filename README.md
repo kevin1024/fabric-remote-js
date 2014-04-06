@@ -3,6 +3,10 @@
 This is a javascript interface to Fabric Remote.  It allows you to remotely call
 Fabric commands over the HTTP REST API provided by Fabric Remote.
 
+# What is Fabric Remote?
+
+It's a project I'm working on that I haven't open sourced yet.  But this is the JS interface for it!
+
 # Installation
 
 ```
@@ -46,4 +50,8 @@ fr.execute([
 ])
 ```
 
-Both of these return a jquery promise.
+Both of these return a q.js promise
+
+# Promise interface
+
+You can call .progress() on the promise to get regular updates of the streaming output of the task execution.  .success() will get called with the output of your execution.
