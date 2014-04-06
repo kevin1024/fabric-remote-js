@@ -11,6 +11,7 @@
     "grunt-contrib-connect": "^0.7.1"
   },
   "dependencies": {
-    "retry": "^0.6.0"
+    "retry": "^0.6.0",
+    "q": "^1.0.1"
   }
 }
