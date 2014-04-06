@@ -1,6 +1,7 @@
 {
   "name": "fabric-remote-client",
   "version": "0.0.1",
+  "author": "Kevin McCarthy <me@kevinmccarthy.org>",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.9.2",
@@ -8,10 +9,15 @@
     "grunt-contrib-jasmine": "~0.5.3",
     "browserify": "^3.38.0",
     "grunt-jasmine-node": "^0.2.1",
-    "grunt-contrib-connect": "^0.7.1"
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-browserify": "^2.0.3"
   },
   "dependencies": {
     "retry": "^0.6.0",
     "q": "^1.0.1"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/kevin1024/fabric-remote-js.git"
   }
 }
