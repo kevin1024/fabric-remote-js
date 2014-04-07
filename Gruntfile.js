@@ -6,8 +6,8 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: 'build/<%= pkg.name %>.js',
+        dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
     jasmine_node: {
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
       }
     },
     jasmine: {
-      src: 'build/module.js',
+      src: 'build/<%= pkg.name %>.js',
       options: {
         specs: 'build/spec.js',
         version: '1.3.1',
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          'build/module.js': ['src/**/*.js'],
+          'build/<%= pkg.name %>.js': ['src/**/*.js'],
           'build/spec.js': ['spec/**/*.js']
         }
       },
@@ -55,5 +55,6 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('test:browser', ['jshint','browserify','connect','jasmine']);
   grunt.registerTask('test:node', ['jshint','jasmine_node']);
+  grunt.registerTask('build', ['test:browser','test:node','uglify']);
 
 };

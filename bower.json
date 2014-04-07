@@ -1,0 +1,28 @@
+{
+  "name": "fabric-remote",
+  "version": "0.0.2",
+  "homepage": "https://github.com/kevin1024/fabric-remote-js",
+  "authors": [
+    "Kevin McCarthy <me@kevinmccarthy.org>"
+  ],
+  "description": "A client for Fabric Remote",
+  "main": "dist/fabric-remote.min.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "fabric",
+    "remote",
+    "python",
+    "client"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
