@@ -55,6 +55,7 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('test:browser', ['jshint','browserify','connect','jasmine']);
   grunt.registerTask('test:node', ['jshint','jasmine_node']);
-  grunt.registerTask('build', ['test:browser','test:node','uglify']);
+  grunt.registerTask('test', ['test:browser','test:node']);
+  grunt.registerTask('build', ['test','uglify']);
 
 };

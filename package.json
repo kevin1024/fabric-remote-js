@@ -20,5 +20,8 @@
   "repository" : {
     "type" : "git",
     "url" : "http://github.com/kevin1024/fabric-remote-js.git"
+  },
+  "scripts": {
+    "test": "grunt test"
   }
 }
