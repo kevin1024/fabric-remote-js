@@ -6,3 +6,5 @@ build/
 .coverage_data/
 .coverage_debug/
 cover_html/
+.grunt
+_SpecRunner.html
