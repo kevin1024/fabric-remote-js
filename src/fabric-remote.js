@@ -54,6 +54,10 @@ FabricRemote.prototype.listTasks = function() {
   return this.request('GET', '/tasks');
 };
 
+FabricRemote.prototype.listExecutions = function() {
+  return this.request('GET', '/executions');
+};
+
 FabricRemote.prototype.streamOutput = function(deferred, outputUrl) {
   var buffer = "";
   var options = {

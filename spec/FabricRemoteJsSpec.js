@@ -17,7 +17,7 @@ describe("FabricRemote", function() {
       return output;
     }, "the http call has been made", 1000);
     runs(function() {
-      expect(output).toEqual({ host_type : { name : 'host_type', description : null }, check_foo : { name : 'check_foo', description : null } });
+      expect(output).toEqual({ host_type : { name : 'host_type', description : "test description" }, check_foo : { name : 'check_foo', description : null } });
     });
   });
 
@@ -32,6 +32,19 @@ describe("FabricRemote", function() {
     }, "the task to be executed", 100000);
     runs(function() {
       expect(output['results'][0][1]).toEqual({"98.129.6.188":"shit worked"});
+    });
+  });
+
+  it("can list executions", function() {
+    var output;
+    fr.listExecutions().then(function(data) {
+      output = data;
+    });
+    waitsFor(function() {
+      return output;
+    }, "the http call has been made", 1000);
+    runs(function() {
+      expect(output);
     });
   });
 
