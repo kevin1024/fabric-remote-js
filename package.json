@@ -1,6 +1,6 @@
 {
   "name": "fabric-remote",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Kevin McCarthy <me@kevinmccarthy.org>",
   "main": "src/fabric-remote.js",
   "devDependencies": {
