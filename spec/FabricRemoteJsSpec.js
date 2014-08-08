@@ -31,7 +31,7 @@ describe("FabricRemote", function() {
       return output;
     }, "the task to be executed", 100000);
     runs(function() {
-      expect(output['results'][0][1]).toEqual({"98.129.6.188":"shit worked"});
+      expect(output['results'][0][1]).toEqual({"<local-only>":"shit worked"});
     });
   });
 
@@ -63,6 +63,20 @@ describe("FabricRemote", function() {
     }, "the task to be executed", 100000);
     runs(function() {
       expect(output.length).toBeGreaterThan(100);
+    });
+  });
+
+  it("returns the output url", function() {
+    var output;
+    var executions = [{"task":"host_type"}];
+    fr.execute(executions).then(function(data) {
+      output = data;
+    });
+    waitsFor(function() {
+      return output;
+    }, "the task to be executed", 100000);
+    runs(function() {
+      expect(output.output).not.toBeUndefined();
     });
   });
 
